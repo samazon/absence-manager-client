@@ -3,7 +3,7 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
+    "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
@@ -14,7 +14,23 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/modules/*": ["src/modules/*"],
+      "@/userModules/*": ["src/user-modules/*"],
+      "@/components/*": ["src/components/*"],
+      "@/client/*": ["src/client/*"],
+      "@/adminModules/*": ["src/modules/admin-modules/*"],
+      "@/layout/*": ["src/components/layouts/*"],
+      "@/commons/*": ["src/common/*"],
+      "@/constants/*": ["src/constants/*"],
+      "@/inputs/*": ["src/inputs/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/modals/*": ["src/components/modals/*"],
+      "@/alert/*": ["src/components/alert/*"],
+      "@/icons/*": ["src/icons/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
