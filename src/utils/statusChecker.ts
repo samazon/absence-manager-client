@@ -1,3 +1,5 @@
+import { AbsenceStatus } from '@/constants/types';
+
 export function statusChecker({
   confirmedAt,
   rejectedAt
@@ -5,11 +7,11 @@ export function statusChecker({
   confirmedAt: string | null;
   rejectedAt: string | null;
 }) {
-  let result = 'Requested';
+  let result = AbsenceStatus.REQUESTED;
   if (confirmedAt !== null && rejectedAt === null) {
-    result = 'Confirmed';
+    result = AbsenceStatus.CONFIRMED;
   } else if (confirmedAt === null && rejectedAt !== null) {
-    result = 'Rejected';
+    result = AbsenceStatus.REJECTED;
   }
   return result;
 }

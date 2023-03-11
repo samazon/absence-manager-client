@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export interface Absence {
   admitterId: number | null;
   admitterNote?: string | null;
@@ -27,3 +28,9 @@ export const FILTER_OPTIONS = [
   { label: 'Requested', value: 'requested' },
   { label: 'Rejected', value: 'rejected' }
 ];
+
+export enum AbsenceStatus {
+  REQUESTED = 'Requested',
+  CONFIRMED = 'Confirmed',
+  REJECTED = 'Rejected'
+}

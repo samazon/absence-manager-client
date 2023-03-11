@@ -29,7 +29,8 @@
       "@/utils/*": ["src/utils/*"],
       "@/modals/*": ["src/components/modals/*"],
       "@/alert/*": ["src/components/alert/*"],
-      "@/icons/*": ["src/icons/*"]
+      "@/icons/*": ["src/icons/*"],
+      "@/store/*": ["src/store/*"]
     }
   },
   "include": ["src"],

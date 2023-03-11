@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Absence, FILTER_OPTIONS } from '@/constants/types';
-import AbsenceListItem from './AbsenceListItem';
-import { RootState } from '../store';
-import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { format } from 'date-fns';
+
+import { RootState } from '@/store/index';
+import { Absence, FILTER_OPTIONS } from '@/constants/types';
+
+import AbsenceListItem from './AbsenceListItem';
 import Pagination from './Pagination';
 import DatePicker from 'react-datepicker';
+
 import 'react-datepicker/dist/react-datepicker.css';
-import { format } from 'date-fns';
 
 type AbsenceListProps = {
   pageSize?: number;
@@ -99,16 +102,13 @@ const AbsenceList: React.FC<AbsenceListProps> = ({
         />
       </div>
       <Pagination
+        page={page}
         totalPages={totalPages}
         currentPage={page}
         onPageChange={handlePageChange}
+        handlePrevClick={handlePrevClick}
+        handleNextClick={handleNextClick}
       />
-      <button disabled={page === 1} onClick={handlePrevClick}>
-        Previous Page
-      </button>
-      <button disabled={page === totalPages} onClick={handleNextClick}>
-        Next Page
-      </button>
       {!filteredAbsences.length && <div>No Record Found!</div>}
       <ul className="flex flex-wrap flex-col justify-center">
         {filteredAbsences &&
