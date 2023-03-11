@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Absence, FILTER_OPTIONS } from '@/constants/types';
 import AbsenceListItem from './AbsenceListItem';
 import { RootState } from '../store';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import Pagination from './Pagination';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { format } from 'date-fns';
 
 type AbsenceListProps = {
   pageSize?: number;
@@ -14,6 +18,7 @@ const AbsenceList: React.FC<AbsenceListProps> = ({
 }: AbsenceListProps) => {
   const [page, setPage] = useState(1);
   const [selectedFilter, setSelectedFilter] = useState<string>('all');
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   const absences = useSelector<RootState, Absence[]>((state) =>
     Object.values(state.absence.data).slice(
@@ -43,11 +48,28 @@ const AbsenceList: React.FC<AbsenceListProps> = ({
     setSelectedFilter(event.target.value);
   };
 
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date);
+  };
+
   const filteredAbsences = absences.filter((absence) => {
-    if (selectedFilter === 'all') {
+    if (selectedFilter === 'all' && !selectedDate) {
       return true;
     }
-    return absence.status.toLowerCase() === selectedFilter;
+    if (selectedFilter === 'all') {
+      return (
+        format(new Date(absence.startDate), 'yyyy-MM-dd') ===
+        format(selectedDate!, 'yyyy-MM-dd')
+      );
+    }
+    if (!selectedDate) {
+      return absence.status.toLowerCase() === selectedFilter;
+    }
+    return (
+      absence.status.toLowerCase() === selectedFilter &&
+      format(new Date(absence.startDate), 'yyyy-MM-dd') ===
+        format(selectedDate!, 'yyyy-MM-dd')
+    );
   });
 
   return (
@@ -64,6 +86,17 @@ const AbsenceList: React.FC<AbsenceListProps> = ({
             </option>
           ))}
         </select>
+      </div>
+      <div>
+        <label htmlFor="date-picker">Filter by date:</label>
+        <DatePicker
+          id="date-picker"
+          selected={selectedDate}
+          onChange={handleDateChange}
+          dateFormat="yyyy-MM-dd"
+          isClearable
+          placeholderText="Select date"
+        />
       </div>
       <Pagination
         totalPages={totalPages}
