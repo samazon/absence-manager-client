@@ -10,6 +10,7 @@ export interface Absence {
   startDate: string;
   type: string;
   userId: number;
+  status: string;
 }
 
 export interface Member {
@@ -22,7 +23,7 @@ export interface Member {
 
 export const FILTER_OPTIONS = [
   { label: 'All', value: 'all' },
-  { label: 'Approved', value: 'approved' },
-  { label: 'Pending', value: 'pending' },
+  { label: 'Confirmed', value: 'confirmed' },
+  { label: 'Requested', value: 'requested' },
   { label: 'Rejected', value: 'rejected' }
 ];

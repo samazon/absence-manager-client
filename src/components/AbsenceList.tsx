@@ -1,8 +1,7 @@
-import { Absence } from '@/constants/types';
+import { Absence, FILTER_OPTIONS } from '@/constants/types';
 import AbsenceListItem from './AbsenceListItem';
 import { RootState } from '../store';
 import { useSelector } from 'react-redux';
-import { statusChecker } from '@/utils/statusChecker';
 import { useState } from 'react';
 import Pagination from './Pagination';
 
@@ -14,6 +13,7 @@ const AbsenceList: React.FC<AbsenceListProps> = ({
   pageSize = 10
 }: AbsenceListProps) => {
   const [page, setPage] = useState(1);
+  const [selectedFilter, setSelectedFilter] = useState<string>('all');
 
   const absences = useSelector<RootState, Absence[]>((state) =>
     Object.values(state.absence.data).slice(
@@ -21,15 +21,10 @@ const AbsenceList: React.FC<AbsenceListProps> = ({
       page * pageSize
     )
   );
-
   const totalAbsences = useSelector<RootState, Absence[]>((state) =>
     Object.values(state.absence.data)
   );
-
   const totalPages = Math.ceil(totalAbsences.length / pageSize);
-
-  console.log(totalPages);
-
   const members = useSelector((state: RootState) => state.members.data);
 
   const handlePrevClick = () => {
@@ -44,8 +39,32 @@ const AbsenceList: React.FC<AbsenceListProps> = ({
     setPage(pageNumber);
   };
 
+  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedFilter(event.target.value);
+  };
+
+  const filteredAbsences = absences.filter((absence) => {
+    if (selectedFilter === 'all') {
+      return true;
+    }
+    return absence.status.toLowerCase() === selectedFilter;
+  });
+
   return (
     <>
+      <div className="filter-dropdown">
+        <label htmlFor="filter">Filter by status:</label>
+        <select
+          id="filter"
+          value={selectedFilter}
+          onChange={handleFilterChange}>
+          {FILTER_OPTIONS.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
       <Pagination
         totalPages={totalPages}
         currentPage={page}
@@ -57,20 +76,17 @@ const AbsenceList: React.FC<AbsenceListProps> = ({
       <button disabled={page === totalPages} onClick={handleNextClick}>
         Next Page
       </button>
-
+      {!filteredAbsences.length && <div>No Record Found!</div>}
       <ul className="flex flex-wrap flex-col justify-center">
-        {absences &&
-          absences.map((absence) => {
+        {filteredAbsences &&
+          filteredAbsences.map((absence) => {
             return (
               <AbsenceListItem
                 name={members[absence.userId].name}
                 key={absence.id}
                 period={`${absence.startDate} - ${absence.endDate}`}
                 type={absence.type}
-                status={statusChecker({
-                  confirmedAt: absence.confirmedAt,
-                  rejectedAt: absence.rejectedAt
-                })}
+                status={absence.status}
                 memberNote={absence.memberNote}
                 admitterNote={absence.admitterNote}
               />

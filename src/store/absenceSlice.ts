@@ -1,6 +1,7 @@
 // absenceSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Absence } from '@/constants/types';
+import { statusChecker } from '@/utils/statusChecker';
 
 interface AbsenceState {
   data: { [id: string]: Absence };
@@ -26,7 +27,13 @@ const absenceSlice = createSlice({
       state.isLoading = false;
       state.data = {};
       action.payload.forEach((absence) => {
-        state.data[absence.id] = absence;
+        state.data[absence.id] = {
+          ...absence,
+          status: statusChecker({
+            confirmedAt: absence.confirmedAt,
+            rejectedAt: absence.rejectedAt
+          })
+        };
       });
     },
     getAbsencesFailure(state, action: PayloadAction<string>) {
