@@ -11,7 +11,7 @@ export interface Absence {
   startDate: string;
   type: string;
   userId: number;
-  status: string;
+  status?: string | undefined;
 }
 
 export interface Member {

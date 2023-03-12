@@ -16,7 +16,7 @@ const SectionLabel = styled.h3`
   font-size: 2rem;
   left: 2.4rem;
   position: absolute;
-  top: 2.1rem;
+  top: 30px;
 `;
 
 const AbsencesPanel: React.FC = () => {

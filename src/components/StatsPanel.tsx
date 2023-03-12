@@ -12,6 +12,7 @@ const StatsPanelWrapper = styled.div`
   font-size: 1.6rem;
   margin: 0 3rem 0 0;
   padding: 2.4rem;
+  height: 100%;
 `;
 
 const SectionLabel = styled.h3`

@@ -58,6 +58,7 @@ const StyledPageButtons = styled.div`
     }
 
     &:disabled {
+      background-color: #d3d3d36c;
       cursor: not-allowed;
       svg {
         fill: gray;

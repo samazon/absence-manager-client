@@ -25,7 +25,7 @@ const MainElement = styled.main`
 
 const SectionsWrapper = styled.div`
   display: flex;
-  flex: 1 100%;
+  margin: 0 0 5rem;
 `;
 
 const SectionTitle = styled.h2`

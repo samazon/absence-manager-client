@@ -8,27 +8,22 @@
   padding: 0;
 }
 
-.react-datepicker__tab-loop * {
-  font-size: 0.8rem;
+body {
+  background-color: #fafafa;
 }
 
-.react-datepicker__navigation-icon::before {
-  height: 6px;
-  top: -5px;
-  width: 6px;
+.react-datepicker * {
+  font-size: 14px;
 }
 
-.react-datepicker__navigation-icon::before {
-  right: 0;
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+  width: 3rem;
+  height: 3rem;
+  line-height: 3rem;
 }
 
-.react-datepicker__navigation-icon--next::before {
-  left: 0;
-}
-
-.react-datepicker__close-icon::after {
-  background-color: darkgrey;
-  font-size: 6px;
-  height: 6px;
-  width: 6px;
+.react-datepicker-popper {
+  transform: translate3d(729px, 64px, 0px);
 }

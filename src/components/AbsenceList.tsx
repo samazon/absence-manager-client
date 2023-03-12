@@ -11,6 +11,8 @@ import AbsenceListItem from './AbsenceListItem';
 import Pagination from './Pagination';
 import FilterByStatus from './FilterByStatus';
 import FilterByDate from './FilterByDate';
+import NoRecordFound from './NoRecordFound';
+import Loader from './Loader';
 
 const FiltersWrapper = styled.div`
   align-items: center;
@@ -28,6 +30,16 @@ const FiltersWrapper = styled.div`
   width: 100%;
 `;
 
+const AbsencesListWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 3rem 0px 0;
+
+  * {
+    font-size: 1.6rem;
+  }
+`;
+
 const AbsenceList: React.FC = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -42,6 +54,9 @@ const AbsenceList: React.FC = () => {
   );
   const totalAbsences = useSelector<RootState, Absence[]>((state) =>
     Object.values(state.absence.data)
+  );
+  const isAbsenceLoading = useSelector<RootState>(
+    (state) => state.absence.isLoading
   );
   const totalPages = Math.ceil(totalAbsences.length / pageSize);
   const members = useSelector((state: RootState) => state.members.data);
@@ -69,10 +84,10 @@ const AbsenceList: React.FC = () => {
       );
     }
     if (!selectedDate) {
-      return absence.status.toLowerCase() === selectedFilter;
+      return absence?.status?.toLowerCase() === selectedFilter;
     }
     return (
-      absence.status.toLowerCase() === selectedFilter &&
+      absence?.status?.toLowerCase() === selectedFilter &&
       format(new Date(absence.startDate), 'yyyy-MM-dd') ===
         format(selectedDate!, 'yyyy-MM-dd')
     );
@@ -100,15 +115,16 @@ const AbsenceList: React.FC = () => {
         pageSize={pageSize}
         setPageSize={setPageSize}
       />
-      {!filteredAbsences.length && <div>No Record Found!</div>}
-      <ul>
+      {isAbsenceLoading && !filteredAbsences.length && <Loader />}
+      {!isAbsenceLoading && !filteredAbsences.length && <NoRecordFound />}
+      <AbsencesListWrapper>
         {filteredAbsences &&
           filteredAbsences.map((absence) => {
             return (
               <AbsenceListItem
                 name={members[absence.userId].name}
                 key={absence.id}
-                period={`${absence.startDate} - ${absence.endDate}`}
+                period={`${absence.startDate} to ${absence.endDate}`}
                 type={absence.type}
                 status={absence.status}
                 memberNote={absence.memberNote}
@@ -116,7 +132,7 @@ const AbsenceList: React.FC = () => {
               />
             );
           })}
-      </ul>
+      </AbsencesListWrapper>
     </>
   );
 };

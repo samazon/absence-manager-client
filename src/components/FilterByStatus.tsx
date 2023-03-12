@@ -15,12 +15,13 @@ const FilterDropDown = styled.div`
 
   label {
     color: #333;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     margin-bottom: 0.5rem;
   }
 
   select {
-    height: 16px;
+    font-size: 1.2rem;
+    height: 30px;
     width: 100px;
   }
 `;

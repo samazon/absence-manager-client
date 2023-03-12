@@ -17,14 +17,19 @@ const FilterDropdown = styled.div`
 
   label {
     color: #333;
-    font-size: 0.8;
+    font-size: 1.2rem;
     margin-bottom: 0.5rem;
   }
 
   input {
-    font-size: 1rem;
-    height: 16px;
-    width: 100px;
+    font-size: 1.2rem;
+    height: 30px;
+    padding: 4px;
+    width: 130px;
+
+    &::placeholder {
+      color: #333;
+    }
   }
 `;
 
