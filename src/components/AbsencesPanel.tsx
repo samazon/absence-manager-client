@@ -8,14 +8,15 @@ const AbsencesPanelWrapper = styled.div`
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   flex: 2.3;
   font-size: 1.6rem;
-  margin: 0 3rem 0 0;
-  padding: 2.4rem 2.4rem 5rem;
+  padding: 7rem 2.4rem 5rem;
   position: relative;
 `;
 
 const SectionLabel = styled.h3`
   font-size: 2rem;
-  margin: 0 0 2rem;
+  left: 2.4rem;
+  position: absolute;
+  top: 2.1rem;
 `;
 
 const AbsencesPanel: React.FC = () => {

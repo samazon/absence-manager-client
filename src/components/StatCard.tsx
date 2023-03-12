@@ -1,5 +1,4 @@
 import React from 'react';
-
 import styled from 'styled-components';
 
 interface StatCardProps {
@@ -29,7 +28,8 @@ const StyledCard = styled.div`
     font-weight: 300;
   }
   span:last-child {
-    font-weight: #999;
+    color: #555;
+    font-weight: 500;
   }
 `;
 

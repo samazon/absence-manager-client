@@ -1,9 +1,12 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
   page: number;
+  pageSize: number;
+  setPageSize: Dispatch<SetStateAction<number>>;
   handlePrevClick: () => void;
   handleNextClick: () => void;
   // eslint-disable-next-line no-unused-vars
@@ -11,26 +14,27 @@ interface PaginationProps {
 }
 
 const PaginationWrapper = styled.div`
+  align-items: center;
+  border-top: 1px solid #f5f5f5;
+  bottom: 0;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 50px;
   font-size: 1.6rem;
-  border-top: 1px solid #f5f5f5;
-  position: absolute;
-  bottom: 0;
+  height: 50px;
+  justify-content: space-between;
   left: 0;
-  width: 100%;
   padding: 1rem 2.4rem;
+  position: absolute;
+  width: 100%;
+
   > p {
     display: inline;
   }
 `;
 
 const StyledPageButtons = styled.div`
-  display: flex;
   align-items: center;
+  display: flex;
 
   p {
     font-size: 1.4rem;
@@ -38,19 +42,19 @@ const StyledPageButtons = styled.div`
   }
 
   button {
-    width: 20px;
-    height: 20px;
     background: white;
-    border: 1px solid #999;
     border-radius: 4px;
+    border: 1px solid #999;
+    height: 20px;
     position: relative;
+    width: 20px;
 
     svg {
-      width: 14px;
+      left: 50%;
       position: absolute;
       top: 50%;
-      left: 50%;
       transform: translate(-50%, -50%);
+      width: 14px;
     }
 
     &:disabled {
@@ -63,14 +67,21 @@ const StyledPageButtons = styled.div`
 `;
 
 const CustomSelect = styled.div`
+  align-items: center;
+  display: flex;
   position: relative;
 
-  select {
-    height: 20px;
-    width: 100px;
+  p {
     font-size: 1.4rem;
-    border: 1px solid #999;
+    margin: 0 1rem 0 0;
+  }
+
+  select {
     border-radius: 4px;
+    border: 1px solid #999;
+    font-size: 1.4rem;
+    height: 20px;
+    width: 40px;
   }
 `;
 
@@ -78,23 +89,16 @@ const Pagination: React.FC<PaginationProps> = ({
   page,
   currentPage,
   totalPages,
-  onPageChange,
+  pageSize,
+  setPageSize,
   handlePrevClick,
   handleNextClick
 }: PaginationProps) => {
-  const handlePageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    onPageChange(parseInt(event.target.value));
+  const handlePageSizeChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setPageSize(parseInt(event.target.value));
   };
-
-  const getPages = () => {
-    const pages: number[] = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pages.push(i);
-    }
-    return pages;
-  };
-
-  const pages = getPages();
 
   return (
     <PaginationWrapper>
@@ -110,10 +114,11 @@ const Pagination: React.FC<PaginationProps> = ({
         </button>
       </StyledPageButtons>
       <CustomSelect>
-        <select value={currentPage} onChange={handlePageChange}>
-          {pages.map((page) => (
-            <option key={page} value={page}>
-              {page}
+        <p>Records per page:</p>
+        <select value={pageSize} onChange={handlePageSizeChange}>
+          {[5, 10, 15].map((pages) => (
+            <option key={pages} value={pages}>
+              {pages}
             </option>
           ))}
         </select>

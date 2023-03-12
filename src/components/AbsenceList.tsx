@@ -2,24 +2,35 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { format } from 'date-fns';
+import styled from 'styled-components';
 
 import { RootState } from '@/store/index';
-import { Absence, FILTER_OPTIONS } from '@/constants/types';
+import { Absence } from '@/constants/types';
 
 import AbsenceListItem from './AbsenceListItem';
 import Pagination from './Pagination';
-import DatePicker from 'react-datepicker';
+import FilterByStatus from './FilterByStatus';
+import FilterByDate from './FilterByDate';
 
-import 'react-datepicker/dist/react-datepicker.css';
+const FiltersWrapper = styled.div`
+  align-items: center;
+  border-bottom: 1px solid #f5f5f5;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  display: flex;
+  font-size: 1.6rem;
+  justify-content: flex-end;
+  left: 0;
+  margin: 0 0 30px;
+  padding: 1.5rem 2.4rem;
+  position: absolute;
+  top: 0;
+  width: 100%;
+`;
 
-type AbsenceListProps = {
-  pageSize?: number;
-};
-
-const AbsenceList: React.FC<AbsenceListProps> = ({
-  pageSize = 10
-}: AbsenceListProps) => {
+const AbsenceList: React.FC = () => {
   const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const [selectedFilter, setSelectedFilter] = useState<string>('all');
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
@@ -47,14 +58,6 @@ const AbsenceList: React.FC<AbsenceListProps> = ({
     setPage(pageNumber);
   };
 
-  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedFilter(event.target.value);
-  };
-
-  const handleDateChange = (date: Date | null) => {
-    setSelectedDate(date);
-  };
-
   const filteredAbsences = absences.filter((absence) => {
     if (selectedFilter === 'all' && !selectedDate) {
       return true;
@@ -77,30 +80,16 @@ const AbsenceList: React.FC<AbsenceListProps> = ({
 
   return (
     <>
-      <div className="filter-dropdown">
-        <label htmlFor="filter">Filter by status:</label>
-        <select
-          id="filter"
-          value={selectedFilter}
-          onChange={handleFilterChange}>
-          {FILTER_OPTIONS.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="date-picker">Filter by date:</label>
-        <DatePicker
-          id="date-picker"
-          selected={selectedDate}
-          onChange={handleDateChange}
-          dateFormat="yyyy-MM-dd"
-          isClearable
-          placeholderText="Select date"
+      <FiltersWrapper>
+        <FilterByDate
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
         />
-      </div>
+        <FilterByStatus
+          selectedFilter={selectedFilter}
+          setSelectedFilter={setSelectedFilter}
+        />
+      </FiltersWrapper>
       <Pagination
         page={page}
         totalPages={totalPages}
@@ -108,9 +97,11 @@ const AbsenceList: React.FC<AbsenceListProps> = ({
         onPageChange={handlePageChange}
         handlePrevClick={handlePrevClick}
         handleNextClick={handleNextClick}
+        pageSize={pageSize}
+        setPageSize={setPageSize}
       />
       {!filteredAbsences.length && <div>No Record Found!</div>}
-      <ul className="flex flex-wrap flex-col justify-center">
+      <ul>
         {filteredAbsences &&
           filteredAbsences.map((absence) => {
             return (
