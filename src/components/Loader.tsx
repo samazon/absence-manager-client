@@ -19,7 +19,7 @@ const LoaderWrapper = styled.div`
 
 const Loader: React.FC = () => {
   return (
-    <LoaderWrapper>
+    <LoaderWrapper data-testid="loader-wrapper">
       <img src={LoaderIcon} alt="loader image" />
     </LoaderWrapper>
   );

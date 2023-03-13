@@ -2,13 +2,12 @@ import { Absence, Member } from '@/constants/types';
 import absencesData from './absences.json';
 import membersData from './members.json';
 
-const FAKE_API_DELAY_MS = 5000;
+const FAKE_API_DELAY_MS = 1000;
 
 export function getAbsences(): Promise<Absence[]> {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const { payload } = absencesData;
-      resolve(payload);
+      resolve(absencesData?.payload);
     }, FAKE_API_DELAY_MS);
   });
 }
@@ -16,8 +15,7 @@ export function getAbsences(): Promise<Absence[]> {
 export function getMembers(): Promise<Member[]> {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const { payload } = membersData;
-      resolve(payload);
+      resolve(membersData?.payload);
     }, FAKE_API_DELAY_MS);
   });
 }

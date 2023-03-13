@@ -104,19 +104,28 @@ const Pagination: React.FC<PaginationProps> = ({
   return (
     <PaginationWrapper>
       <StyledPageButtons>
-        <button disabled={page === 1} onClick={handlePrevClick}>
+        <button
+          disabled={page === 1}
+          onClick={handlePrevClick}
+          data-testid="prev-button">
           <ChevronLeftIcon />
         </button>
         <p>
           {currentPage}/{totalPages}
         </p>
-        <button disabled={page === totalPages} onClick={handleNextClick}>
+        <button
+          disabled={page === totalPages}
+          onClick={handleNextClick}
+          data-testid="next-button">
           <ChevronRightIcon />
         </button>
       </StyledPageButtons>
       <CustomSelect>
         <p>Records per page:</p>
-        <select value={pageSize} onChange={handlePageSizeChange}>
+        <select
+          data-testid="records-select"
+          value={pageSize}
+          onChange={handlePageSizeChange}>
           {[5, 10, 15].map((pages) => (
             <option key={pages} value={pages}>
               {pages}
