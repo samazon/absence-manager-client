@@ -34,7 +34,7 @@ const Header: React.FC = () => {
     <HeaderMain>
       <Container>
         <Logo href="/">
-          <LogoImage src={logo} height={70} />
+          <LogoImage src={logo} height={70} alt="Crewmeister logo" />
           <span>Crewmeister</span>
         </Logo>
       </Container>

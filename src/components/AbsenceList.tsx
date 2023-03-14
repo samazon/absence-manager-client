@@ -117,7 +117,7 @@ const AbsenceList: React.FC = () => {
       />
       {isAbsenceLoading && !filteredAbsences.length && <Loader />}
       {!isAbsenceLoading && !filteredAbsences.length && <NoRecordFound />}
-      <AbsencesListWrapper>
+      <AbsencesListWrapper data-testid="absence-list-wrapper">
         {filteredAbsences &&
           filteredAbsences.map((absence) => {
             return (

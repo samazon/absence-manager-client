@@ -17,9 +17,9 @@ export interface Absence {
 export interface Member {
   id: number;
   userId: number;
-  crewId: number;
+  crewId?: number;
   name: string;
-  image: string;
+  image?: string;
 }
 
 export const FILTER_OPTIONS = [

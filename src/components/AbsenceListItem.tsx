@@ -68,7 +68,7 @@ const AbsenceListItem: React.FC<Props> = (props: Props) => {
     <AbsenceCard key={name}>
       <strong>{name}</strong>
       <p>Type: {capitalize(type!)}</p>
-      <p>Period: {period}</p>
+      <p data-testid="period-text">Period: {period}</p>
       <span className={`status ${status}`}>{status}</span>
       {memberNote && <p>Member note: {memberNote}</p>}
       {admitterNote && <p>Admitter note: {admitterNote}</p>}

@@ -8,7 +8,7 @@ interface MembersState {
   error: string | null;
 }
 
-const initialState: MembersState = {
+export const initialState: MembersState = {
   data: {},
   isLoading: false,
   error: null

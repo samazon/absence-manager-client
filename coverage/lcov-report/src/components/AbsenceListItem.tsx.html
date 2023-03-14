@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -143,9 +143,9 @@
 <a name='L78'></a><a href='#L78'>78</a>
 <a name='L79'></a><a href='#L79'>79</a>
 <a name='L80'></a><a href='#L80'>80</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -156,7 +156,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -205,10 +205,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -220,11 +220,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable @typescript-eslint/no-non-null-assertion */
-<span class="cstat-no" title="statement not covered" >import { capitalize } from '@/utils/capitalizeFirst';</span>
+import { capitalize } from '@/utils/capitalizeFirst';
 import React from 'react';
-<span class="cstat-no" title="statement not covered" >import styled from 'styled-components';</span>
+import styled from 'styled-components';
 &nbsp;
 interface Props {
   name?: string;
@@ -235,7 +235,7 @@ interface Props {
   admitterNote?: string | null;
 }
 &nbsp;
-const AbsenceCard = <span class="cstat-no" title="statement not covered" >styled.div`</span>
+const AbsenceCard = styled.div`
   border-radius: 0.4rem;
   border: 1px solid #fafafa;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
@@ -284,22 +284,22 @@ const AbsenceCard = <span class="cstat-no" title="statement not covered" >styled
   }
 `;
 &nbsp;
-const AbsenceListItem: React.FC&lt;Props&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(p</span>rops: Props) =&gt; {</span>
-  const { name, type, period, status, memberNote, admitterNote } = <span class="cstat-no" title="statement not covered" >props;</span>
+const AbsenceListItem: React.FC&lt;Props&gt; = (props: Props) =&gt; {
+  const { name, type, period, status, memberNote, admitterNote } = props;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;AbsenceCard key={name}&gt;
       &lt;strong&gt;{name}&lt;/strong&gt;
       &lt;p&gt;Type: {capitalize(type!)}&lt;/p&gt;
-      &lt;p&gt;Period: {period}&lt;/p&gt;
+      &lt;p data-testid="period-text"&gt;Period: {period}&lt;/p&gt;
       &lt;span className={`status ${status}`}&gt;{status}&lt;/span&gt;
       {memberNote &amp;&amp; &lt;p&gt;Member note: {memberNote}&lt;/p&gt;}
-      {admitterNote &amp;&amp; &lt;p&gt;Admitter note: {admitterNote}&lt;/p&gt;}
+      {admitterNote &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >&lt;p&gt;Admitter note: {admitterNote}&lt;/p&gt;}</span>
     &lt;/AbsenceCard&gt;
   );
 };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export default AbsenceListItem;</span>
+export default AbsenceListItem;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -307,7 +307,7 @@ const AbsenceListItem: React.FC&lt;Props&gt; = <span class="cstat-no" title="sta
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-13T11:42:43.121Z
+                at 2023-03-14T06:59:39.366Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

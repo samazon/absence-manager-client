@@ -15,7 +15,7 @@ const FooterElement = styled.footer`
 
 const Footer = () => {
   return (
-    <FooterElement>
+    <FooterElement data-testid="footer">
       <Container>
         <p>Crewmeister - Absence Manager &copy; All rights reserved.</p>
       </Container>
