@@ -13,6 +13,7 @@ import FilterByStatus from './FilterByStatus';
 import FilterByDate from './FilterByDate';
 import NoRecordFound from './NoRecordFound';
 import Loader from './Loader';
+import { getAbsencesFailure } from '@/store/absenceSlice';
 
 const FiltersWrapper = styled.div`
   align-items: center;
@@ -61,6 +62,9 @@ const AbsenceList: React.FC = () => {
   const totalPages = Math.ceil(totalAbsences.length / pageSize);
   const members = useSelector((state: RootState) => state.members.data);
 
+  const isAbsenceError = useSelector<RootState>((state) => {
+    return state.absence.error;
+  });
   const handlePrevClick = () => {
     setPage((prevPage) => Math.max(prevPage - 1, 1));
   };
@@ -117,6 +121,10 @@ const AbsenceList: React.FC = () => {
       />
       {isAbsenceLoading && !filteredAbsences.length && <Loader />}
       {!isAbsenceLoading && !filteredAbsences.length && <NoRecordFound />}
+      {isAbsenceError &&
+        !isAbsenceLoading &&
+        !filteredAbsences.length &&
+        alert('Opps! Sorry something went')}
       <AbsencesListWrapper data-testid="absence-list-wrapper">
         {filteredAbsences &&
           filteredAbsences.map((absence) => {

@@ -16,6 +16,7 @@ The following features have been implemented in the application:
 - Displays a loading state until the list is available.
 - Displays an error state if the list is unavailable.
 - Displays an empty state if there are no results.
+- Generates an iCal file that can be imported into outlook (bonus).
 
 ## Tech Stack
 

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { capitalize } from '@/utils/capitalizeFirst';
+import { downloadICal } from '@/utils/dowloadIcal';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -39,30 +40,63 @@ const AbsenceCard = styled.div`
   .status {
     background-color: orange;
     border-radius: 30px;
+    border-style: solid;
+    border-width: 1px;
     color: white;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.2rem;
+    font-weight: 400;
     padding: 5px 15px;
     position: absolute;
     right: 2rem;
+    text-transform: uppercase;
     top: 1.5rem;
 
     &.Requested {
-      background-color: rgb(176, 196, 222);
+      background: #e6f4ff;
+      border-color: #0958d9;
+      color: #0958d9;
     }
 
     &.Confirmed {
-      background-color: #32cd32;
+      background: #f6ffed;
+      border-color: #389e0d;
+      color: #389e0d;
     }
 
     &.Rejected {
-      background-color: rgba(255, 0, 0, 0.924);
+      background: #fff1f0;
+      border-color: #cf1322;
+      color: #cf1322;
     }
+  }
+`;
+
+const AddToCalendarButton = styled.button`
+  border-radius: 4px;
+  border: 0;
+  border: 1px solid #999;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  transition: all 0.25s ease-in-out;
+
+  &:hover {
+    background-color: #ff9419;
+    border-color: #ff9419;
+    color: white;
   }
 `;
 
 const AbsenceListItem: React.FC<Props> = (props: Props) => {
   const { name, type, period, status, memberNote, admitterNote } = props;
+
+  const record = {
+    memberName: name,
+    type,
+    startDate: period?.split(' ')[0],
+    endDate: period?.split(' ')[2],
+    memberNote
+  };
 
   return (
     <AbsenceCard key={name}>
@@ -72,6 +106,10 @@ const AbsenceListItem: React.FC<Props> = (props: Props) => {
       <span className={`status ${status}`}>{status}</span>
       {memberNote && <p>Member note: {memberNote}</p>}
       {admitterNote && <p>Admitter note: {admitterNote}</p>}
+
+      <AddToCalendarButton onClick={() => downloadICal(record)}>
+        Add to Calender
+      </AddToCalendarButton>
     </AbsenceCard>
   );
 };

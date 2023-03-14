@@ -50,6 +50,11 @@ const FilterByDate: React.FC<FilterByDateProps> = ({
         dateFormat="yyyy-MM-dd"
         isClearable
         placeholderText="Select date"
+        peekNextMonth
+        showMonthDropdown
+        showYearDropdown
+        scrollableYearDropdown
+        todayButton="Today"
       />
     </FilterDropdown>
   );
