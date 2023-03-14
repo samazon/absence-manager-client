@@ -53,14 +53,16 @@ git clone https://github.com/samazon/absence-manager-client
 2. Navigate to the project directory.
 
 ```bash
-cd {absence-manager-client}
+cd absence-manager-client
 ```
 
 3. Install the project dependencies using npm or yarn.
 
 ```bash
 npm install
+```
 or
+```bash
 yarn install
 ```
 
@@ -68,7 +70,9 @@ yarn install
 
 ```bash
 npm start
+```
 or
+```bash
 yarn start
 ```
 
@@ -80,7 +84,9 @@ To run the tests for the application, run the following command:
 
 ```bash
 npm test
-or
+```
+or 
+```bash
 yarn test
 ```
 
@@ -90,7 +96,9 @@ To build the application for production, run the following command:
 
 ```bash
 npm run build
+```
 or
+```bash
 yarn build
 ```
 
